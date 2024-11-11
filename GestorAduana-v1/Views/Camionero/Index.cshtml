@@ -5,72 +5,84 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Camioneros</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear Nuevo Camionero", "Create", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Empresa.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Apellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Dui)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Edad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Placa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QueTransporta)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CantidadTransportada)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Empresa.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Apellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dui)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Edad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Placa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QueTransporta)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CantidadTransportada)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdCamionero }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdCamionero }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdCamionero })
-        </td>
-    </tr>
+@using (Html.BeginForm("Index", "Camionero", FormMethod.Get, new { @class = "form-inline mb-3" }))
+{
+    <div class="form-group mx-sm-3 mb-2">
+        <input type="text" name="searchDui" value="@Request.QueryString["searchDui"]" class="form-control" placeholder="Buscar por DUI" />
+    </div>
+    <button type="submit" class="btn btn-secondary mb-2">Buscar</button>
 }
 
+<table class="table table-striped table-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Empresa.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dui)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Edad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Placa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QueTransporta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CantidadTransportada)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Empresa.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dui)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Edad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Placa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QueTransporta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CantidadTransportada)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IdCamionero }, new { @class = "btn btn-sm btn-warning" }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.IdCamionero }, new { @class = "btn btn-sm btn-info" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdCamionero }, new { @class = "btn btn-sm btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

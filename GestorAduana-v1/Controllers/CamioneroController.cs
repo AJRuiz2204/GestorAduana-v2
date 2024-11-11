@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Controllers/CamioneroController.cs
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -7,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GestorAduana_v1.Context;
+using GestorAduana_v1.Models;
 
 namespace GestorAduana_v1.Controllers
 {
@@ -16,9 +18,15 @@ namespace GestorAduana_v1.Controllers
         private GestorAduanasContext db = new GestorAduanasContext();
 
         // GET: Camionero
-        public ActionResult Index()
+        public ActionResult Index(string searchDui)
         {
             var camioneros = db.Camioneros.Include(c => c.Empresa);
+
+            if (!String.IsNullOrEmpty(searchDui))
+            {
+                camioneros = camioneros.Where(c => c.Dui.Contains(searchDui));
+            }
+
             return View(camioneros.ToList());
         }
 
@@ -45,8 +53,6 @@ namespace GestorAduana_v1.Controllers
         }
 
         // POST: Camionero/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "IdCamionero,Nombre,Apellido,Dui,Edad,Placa,QueTransporta,CantidadTransportada,EmpresaId")] Camionero camionero)
@@ -79,8 +85,6 @@ namespace GestorAduana_v1.Controllers
         }
 
         // POST: Camionero/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IdCamionero,Nombre,Apellido,Dui,Edad,Placa,QueTransporta,CantidadTransportada,EmpresaId")] Camionero camionero)
