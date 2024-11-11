@@ -1,0 +1,82 @@
+﻿@model Camionero
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Camionero</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Empresa.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empresa.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dui)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dui)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Edad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Edad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Placa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Placa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QueTransporta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QueTransporta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CantidadTransportada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CantidadTransportada)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdCamionero }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

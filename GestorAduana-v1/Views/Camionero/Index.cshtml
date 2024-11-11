@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Camionero>
+
+@{
+    ViewBag.Title = "Panel de Camionero";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Empresa.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dui)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Edad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Placa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QueTransporta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CantidadTransportada)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Empresa.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dui)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Edad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Placa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QueTransporta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CantidadTransportada)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdCamionero }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdCamionero }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdCamionero })
+        </td>
+    </tr>
+}
+
+</table>

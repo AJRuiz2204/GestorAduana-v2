@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Gestor de Aduanas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("Gestor de Aduanas", "Index", "Home", null, new { @class = "navbar-brand" })
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegación">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })
+                    </li>
+
+                    <!-- Panel de Administración para Administrador -->
+                    @if (User.IsInRole("Administrador"))
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Panel de Administración", "Index", "Usuarios", null, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("BackOffice", "Index", "BackOffice", null, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Camioneros", "Index", "Camionero", null, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Empresas", "Index", "Empresa", null, new { @class = "nav-link" })
+                        </li>
+                    }
+
+                    <!-- Panel de Camionero para Gestor -->
+                    @if (User.IsInRole("Gestor"))
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Camioneros", "Index", "Camionero", null, new { @class = "nav-link" })
+                        </li>
+                    }
+
+                    <!-- Panel de BackOffice sin Usuarios para BackOffice -->
+                    @if (User.IsInRole("BackOffice"))
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("BackOffice", "Index", "BackOffice", null, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Camioneros", "Index", "Camionero", null, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Empresas", "Index", "Empresa", null, new { @class = "nav-link" })
+                        </li>
+                    }
+
+                    <!-- Panel de Conductor solo con Home para Conductor -->
+                    @if (User.IsInRole("Conductor"))
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })
+                        </li>
+                    }
+                </ul>
+
+                <ul class="navbar-nav">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Logout", "Account")">Cerrar Sesión</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Iniciar Sesión", "Login", "Account", null, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Registrarse", "Register", "Account", null, new { @class = "nav-link" })
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Gestor de Aduanas</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

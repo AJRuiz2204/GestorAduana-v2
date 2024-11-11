@@ -1,0 +1,72 @@
+﻿@* Views/Admin/Index.cshtml *@
+@{
+    ViewBag.Title = "Panel de Administración";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">Bienvenido al Panel de Administración</h2>
+    <p class="text-center">Desde aquí puedes gestionar las entidades principales de la aplicación.</p>
+
+    <div class="list-group mt-4">
+        @* Enlace para el CRUD de Usuarios visible solo para Administrador *@
+        @if (User.IsInRole("Administrador"))
+        {
+            <a href="@Url.Action("Index", "Usuarios")" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Gestionar Usuarios</h5>
+                <p class="mb-1">Agregar, editar, eliminar y ver usuarios registrados en el sistema.</p>
+            </a>
+            <a href="@Url.Action("Index", "Camionero")" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Gestionar Camioneros</h5>
+                <p class="mb-1">Administrar la información de los camioneros registrados en el sistema.</p>
+            </a>
+            <a href="@Url.Action("Index", "BackOffice")" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Gestionar BackOffice</h5>
+                <p class="mb-1">Administrar registros de BackOffice, incluyendo datos de transporte y rutas.</p>
+            </a>
+            <a href="@Url.Action("Index", "Empresa")" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Gestionar Empresas</h5>
+                <p class="mb-1">Agregar, editar, eliminar y ver empresas asociadas a las unidades de transporte.</p>
+            </a>
+        }
+
+        @* Enlace para el CRUD de Camioneros visible para Gestor *@
+        @if (User.IsInRole("Gestor"))
+        {
+            <a href="@Url.Action("Index", "Camionero")" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Gestionar Camioneros</h5>
+                <p class="mb-1">Administrar la información de los camioneros registrados en el sistema.</p>
+            </a>
+            <a href="@Url.Action("Index", "BackOffice")" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Gestionar BackOffice</h5>
+                <p class="mb-1">Administrar registros de BackOffice, incluyendo datos de transporte y rutas.</p>
+            </a>
+        }
+
+        @* Enlace para el CRUD de Camioneros visible para Camionero *@
+        @if ( User.IsInRole("Camionero"))
+        {
+            <a href="@Url.Action("Index", "Camionero")" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Gestionar Camioneros</h5>
+                <p class="mb-1">Administrar la información de los camioneros registrados en el sistema.</p>
+            </a>
+        }
+
+        @* Enlace para el CRUD de Empresas visible solo para Administrador y BackOffice *@
+        @if (User.IsInRole("BackOffice"))
+        {
+            <a href="@Url.Action("Index", "Empresa")" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Gestionar Empresas</h5>
+                <p class="mb-1">Agregar, editar, eliminar y ver empresas asociadas a las unidades de transporte.</p>
+            </a>
+            <a href="@Url.Action("Index", "BackOffice")" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Gestionar BackOffice</h5>
+                <p class="mb-1">Administrar registros de BackOffice, incluyendo datos de transporte y rutas.</p>
+            </a>
+            <a href="@Url.Action("Index", "Camionero")" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Gestionar Camioneros</h5>
+                <p class="mb-1">Administrar la información de los camioneros registrados en el sistema.</p>
+            </a>
+        }
+    </div>
+</div>
